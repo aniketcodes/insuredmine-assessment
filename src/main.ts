@@ -1,32 +1,36 @@
-import express from 'express';
-import { config } from 'dotenv';
-
+import 'dotenv/config'
+import express from "express";
+import ApiRoute from "./routes";
+import connectDB from "./config/mongoose.config";
 export class App {
-    public constructor(){
-        config()
-        this.bootstrap()
-        this.homeroute()
-        
-    }
+  public constructor() {
+    connectDB()
+    this.bootstrap();
+    this.apiRoutes();
+    this.homeroute();
+  }
+  
+  private app: express.Application = express();
+  private PORT: number|string = process.env.PORT;
 
-    private app:express.Application=express();
-    private PORT:string=process.env.PORT;
+  public async bootstrap() {
+    this.app.listen(this.PORT, () => {
+        console.log("Server running", this.PORT);
+    });
+  }
 
-    public async bootstrap(){
-        this.app.listen(this.PORT,()=>{
-            console.log("error in runing server at port")
-        })
-        console.log("Server running",process.env.PORT)
-    }
+  public async apiRoutes() {
+    this.app.use("/api", ApiRoute);
+  }
 
-    public async homeroute(){
-        this.app.get('/',(req,res)=>{
-            return res.send({
-                status:200,
-                message:"Running on port"
-            })
-        })
-    }
+  public async homeroute() {
+    this.app.get("/", (req, res) => {
+      return res.send({
+        status: 200,
+        message: "Running on port",
+      });
+    });
+  }
 }
 
-new App()
+new App();
