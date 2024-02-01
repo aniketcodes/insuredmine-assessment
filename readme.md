@@ -1,6 +1,6 @@
 # InsuredMine Assessment - Setup Instructions
 
-This repository contains the code for the InsuredMine Assessment application developed by Aniket. Follow the steps below to set up and run the application on your local machine.
+This repository contains the code for the InsuredMine Assessment application developed by Aniket. Added sonarqube. Follow the steps below to set up and run the application on your local machine.
 
 ## Prerequisites
 
